@@ -23,6 +23,13 @@ function fmtBalance(n) {
   return n.toLocaleString(undefined, { maximumFractionDigits: 4 });
 }
 
+function fmtUsdValue(n) {
+  if (n === 0) return "$0.00";
+  if (n < 0.000001) return "<$0.000001";
+  if (n < 0.01) return `$${n.toFixed(6)}`;
+  return `$${n.toFixed(2)}`;
+}
+
 const STABLE_TOKENS = [
   { key: "usdc", label: "USDC", address: USDC_ADDRESS },
   { key: "eurc", label: "EURC", address: EURC_ADDRESS },
@@ -233,13 +240,13 @@ export default function Profile() {
                   </div>
                   <div className="holding-row__stats">
                     <span className="holding-row__balance">{fmtBalance(h.balance)}</span>
-                    <span className="holding-row__value">${h.valueUsdc.toFixed(2)}</span>
+                    <span className="holding-row__value">{fmtUsdValue(h.valueUsdc)}</span>
                   </div>
                 </Link>
               ))}
               <div className="holdings-total">
                 <span>Total holdings value</span>
-                <span>${totalHoldingsValue.toFixed(2)}</span>
+                <span>{fmtUsdValue(totalHoldingsValue)}</span>
               </div>
             </div>
           )}

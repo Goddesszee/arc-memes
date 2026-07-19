@@ -4,6 +4,8 @@ import "./TokenRow.css";
 function fmtUsd(n) {
   if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(2)}M`;
   if (n >= 1_000) return `$${(n / 1_000).toFixed(1)}K`;
+  if (n === 0) return "$0.00";
+  if (n < 0.01) return `$${n.toFixed(6)}`;
   return `$${n.toFixed(2)}`;
 }
 
