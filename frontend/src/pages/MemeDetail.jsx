@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { Contract, JsonRpcProvider, formatUnits, parseUnits } from "ethers";
 import { useWallet } from "../lib/WalletContext";
 import { useToast } from "../lib/ToastContext";
-import { FACTORY_ADDRESS, USDC_ADDRESS, ARC_RPC_URL, explorerTxUrl, explorerTokenUrl, explorerAddressUrl } from "../lib/config";
+import { FACTORY_ADDRESS, USDC_ADDRESS, ARC_RPC_URL, explorerTxUrl, explorerTokenUrl } from "../lib/config";
 import { FACTORY_ABI, CURVE_ABI, ERC20_ABI } from "../lib/abis";
 import "./MemeDetail.css";
 
@@ -118,9 +118,9 @@ export default function MemeDetail() {
             {price ? `$${price.toFixed(6)}` : "—"} <small>per token</small>
           </span>
           <p className="meme-detail__creator">
-            Created by <a className="mono" href={explorerAddressUrl(meme.creator)} target="_blank" rel="noopener noreferrer">
+            Created by <Link className="mono" to={`/profile/${meme.creator}`}>
               {meme.creator.slice(0, 6)}…{meme.creator.slice(-4)}
-            </a>
+            </Link>
           </p>
           <a className="meme-detail__explorer-link" href={explorerTokenUrl(meme.token)} target="_blank" rel="noopener noreferrer">
             View token on Explorer ↗

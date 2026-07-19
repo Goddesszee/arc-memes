@@ -59,6 +59,7 @@ export default function NavBar() {
             </button>
             {menuOpen && (
               <div className="wallet-menu__dropdown">
+                <Link to={`/profile/${address}`} onClick={() => setMenuOpen(false)}>My profile</Link>
                 <button onClick={copyAddress}>{copied ? "Copied ✓" : "Copy address"}</button>
                 <a href={explorerAddressUrl(address)} target="_blank" rel="noopener noreferrer">
                   View on Explorer ↗

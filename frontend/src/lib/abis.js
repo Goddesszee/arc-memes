@@ -24,3 +24,9 @@ export const ERC20_ABI = [
   "function decimals() view returns (uint8)",
   "function symbol() view returns (string)"
 ];
+
+export const PROFILE_REGISTRY_ABI = [
+  "function setProfile(string name, string avatarURI)",
+  "function getProfile(address user) view returns (string name, string avatarURI, bool exists)",
+  "event ProfileUpdated(address indexed user, string name, string avatarURI)"
+];

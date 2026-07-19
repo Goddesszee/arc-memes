@@ -15,7 +15,12 @@ async function main() {
   const factory = await MemeFactory.deploy(USDC_ADDRESS, LAUNCH_FEE, feeRecipient);
   await factory.waitForDeployment();
 
+  const ProfileRegistry = await hre.ethers.getContractFactory("ProfileRegistry");
+  const profileRegistry = await ProfileRegistry.deploy();
+  await profileRegistry.waitForDeployment();
+
   console.log("MemeFactory deployed to:", await factory.getAddress());
+  console.log("ProfileRegistry deployed to:", await profileRegistry.getAddress());
   console.log("USDC:", USDC_ADDRESS);
   console.log("Launch fee:", LAUNCH_FEE);
   console.log("Fee recipient:", feeRecipient);

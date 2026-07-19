@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import Explore from "./pages/Explore";
 import Launch from "./pages/Launch";
 import MemeDetail from "./pages/MemeDetail";
+import Profile from "./pages/Profile";
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
                 <Route path="/" element={<Explore />} />
                 <Route path="/launch" element={<Launch />} />
                 <Route path="/meme/:tokenAddress" element={<MemeDetail />} />
+                <Route path="/profile/:address" element={<Profile />} />
               </Routes>
               <Footer />
             </BrowserRouter>

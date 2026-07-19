@@ -1,0 +1,182 @@
+.profile {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 24px 100px;
+  flex: 1;
+  width: 100%;
+}
+
+.profile__header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 32px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.profile__avatar {
+  position: relative;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--surface-hi);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  color: var(--muted);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.profile__avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+.profile__avatar-edit {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: none;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.profile__identity {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.profile__identity h1 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  margin: 0;
+}
+
+.profile__name-input {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  max-width: 280px;
+}
+.profile__name-input:focus { border-color: var(--violet-hi); outline: none; }
+
+.profile__address-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.85rem;
+}
+
+.profile__address-row a { color: var(--violet-hi); }
+.profile__address-row a:hover { text-decoration: underline; }
+.mono { font-family: var(--font-mono); color: var(--muted); }
+
+.profile__edit-actions { display: flex; gap: 10px; }
+
+.profile__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.profile__section h2 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  margin: 0 0 16px;
+}
+
+.state-msg { color: var(--muted); font-size: 0.9rem; }
+
+.balance-list, .holdings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.balance-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.balance-row:nth-child(odd) { background: var(--surface); }
+
+.balance-row__value {
+  font-family: var(--font-mono);
+  color: var(--lime);
+}
+
+.balance-row--total {
+  margin-top: 6px;
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.balance-row--total span:last-child {
+  font-family: var(--font-mono);
+  color: var(--text);
+}
+
+.holding-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: background 0.12s ease;
+}
+.holding-row:hover { background: var(--surface-hi); }
+
+.holding-row__thumb {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--surface-hi);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+.holding-row__thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+.holding-row__info { display: flex; flex-direction: column; gap: 1px; flex: 1; min-width: 0; }
+.holding-row__name { font-size: 0.88rem; font-weight: 600; }
+.holding-row__symbol { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); }
+
+.holding-row__stats { display: flex; flex-direction: column; align-items: flex-end; }
+.holding-row__balance { font-family: var(--font-mono); font-size: 0.82rem; }
+.holding-row__value { font-family: var(--font-mono); font-size: 0.75rem; color: var(--lime); }
+
+.holdings-total {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.holdings-total span:last-child { font-family: var(--font-mono); color: var(--text); }
+
+@media (max-width: 680px) {
+  .profile__grid { grid-template-columns: 1fr; }
+}
