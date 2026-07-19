@@ -1,0 +1,127 @@
+.meme-detail { max-width: 900px; margin: 0 auto; padding: 40px 24px 100px; flex: 1; width: 100%; }
+
+.meme-detail__back {
+  color: var(--muted);
+  font-size: 0.9rem;
+  display: inline-block;
+  margin-bottom: 32px;
+}
+.meme-detail__back:hover { color: var(--text); }
+
+.meme-detail__empty {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  padding: 100px 24px;
+}
+
+.meme-detail__layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 48px;
+}
+
+.meme-detail__info { display: flex; flex-direction: column; gap: 6px; }
+
+.meme-detail__image {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 20px;
+  font-family: var(--font-mono);
+  color: var(--muted);
+}
+.meme-detail__image img { width: 100%; height: 100%; object-fit: cover; }
+
+.meme-detail__info h1 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  margin: 0;
+}
+
+.meme-detail__symbol {
+  font-family: var(--font-mono);
+  color: var(--muted);
+}
+
+.meme-detail__price {
+  font-family: var(--font-mono);
+  font-size: 1.6rem;
+  color: var(--lime);
+  margin-top: 12px;
+}
+.meme-detail__price small { color: var(--muted); font-size: 0.85rem; font-weight: 400; }
+
+.meme-detail__creator { color: var(--muted); font-size: 0.85rem; margin-top: 16px; }
+.mono { font-family: var(--font-mono); }
+
+.meme-detail__trade {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.trade__tabs {
+  display: flex;
+  background: var(--surface-hi);
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.trade__tabs button {
+  flex: 1;
+  background: none;
+  border: none;
+  color: var(--muted);
+  padding: 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.trade__tabs button.active { background: var(--violet); color: #0E0B1A; }
+
+.meme-detail__trade label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.meme-detail__trade input {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+}
+
+.meme-detail__trade input:focus { border-color: var(--violet-hi); outline: none; }
+
+.trade__status { color: var(--violet-hi); font-size: 0.85rem; margin: 0; }
+.trade__error { color: var(--pink); font-size: 0.85rem; margin: 0; }
+
+.trade__submit { border: none; width: 100%; }
+.trade__submit--sell { background: var(--pink); color: #0E0B1A; }
+.trade__submit--sell:hover { background: #ff6b84; }
+.trade__submit:disabled { opacity: 0.55; cursor: default; }
+
+@media (max-width: 720px) {
+  .meme-detail__layout { grid-template-columns: 1fr; }
+}
