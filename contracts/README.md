@@ -16,10 +16,13 @@ cp .env.example .env
 npx hardhat compile
 ```
 
-> Note: this was scaffolded in a sandboxed environment that couldn't reach
-> `binaries.soliditylang.org` to download the solc compiler, so compilation
-> hasn't been verified yet. Run this locally first and fix anything that
-> comes up before deploying.
+> Update: contracts have now been compiled and verified error-free (via a
+> standalone `solc` compile, since the sandbox that built this repo couldn't
+> reach `binaries.soliditylang.org` for Hardhat's normal compiler download).
+> `npx hardhat compile` should work fine on a normal machine with regular
+> internet access. If it ever can't reach the compiler download for some
+> reason, `node compile-standalone.js` is a fallback that compiles directly
+> via the `solc` npm package and writes ABI + bytecode to `artifacts-manual/`.
 
 ## Deploy to Arc testnet
 
