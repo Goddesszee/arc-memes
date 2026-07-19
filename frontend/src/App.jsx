@@ -10,6 +10,8 @@ import Explore from "./pages/Explore";
 import Launch from "./pages/Launch";
 import MemeDetail from "./pages/MemeDetail";
 import Profile from "./pages/Profile";
+import Swap from "./pages/Swap";
+import Send from "./pages/Send";
 
 export default function App() {
   return (
@@ -27,6 +29,8 @@ export default function App() {
                 <Route path="/launch" element={<Launch />} />
                 <Route path="/meme/:tokenAddress" element={<MemeDetail />} />
                 <Route path="/profile/:address" element={<Profile />} />
+                <Route path="/swap" element={<Swap />} />
+                <Route path="/send" element={<Send />} />
               </Routes>
               <Footer />
             </BrowserRouter>

@@ -1,0 +1,133 @@
+.send {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 72px 24px;
+}
+
+.send__card {
+  width: 100%;
+  max-width: 440px;
+}
+
+.send__card h1 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  margin: 0 0 12px;
+}
+
+.send__sub {
+  color: var(--muted);
+  line-height: 1.55;
+  margin: 0 0 32px;
+}
+
+.send__form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.send__token-tabs {
+  display: flex;
+  background: var(--surface-hi);
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.send__token-tabs button {
+  flex: 1;
+  background: none;
+  border: none;
+  color: var(--muted);
+  padding: 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.send__token-tabs button.active { background: var(--violet); color: var(--on-accent); }
+
+.send__form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.send__label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.send__balance {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.send__form input {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+}
+
+.send__form input:focus {
+  border-color: var(--violet-hi);
+  outline: none;
+}
+
+.send__field-error {
+  color: var(--pink);
+  font-size: 0.78rem;
+}
+
+.send__pct-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin-top: -6px;
+}
+
+.send__pct-row button {
+  background: var(--surface-hi);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 7px 0;
+  border-radius: 6px;
+  transition: border-color 0.12s ease, color 0.12s ease;
+}
+
+.send__pct-row button:hover {
+  border-color: var(--violet-hi);
+  color: var(--text);
+}
+
+.send__error {
+  color: var(--pink);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.send__submit {
+  border: none;
+  margin-top: 8px;
+}
+
+.send__submit:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+@media (max-width: 640px) {
+  .send { padding: 40px 20px; }
+  .send__card h1 { font-size: 1.6rem; }
+}

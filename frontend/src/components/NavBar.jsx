@@ -63,6 +63,7 @@ export default function NavBar() {
         <nav className="navbar__links">
           <NavLink to="/" end className={({ isActive }) => isActive ? "active" : ""}>Explore</NavLink>
           <DiscoverMenu />
+          <NavLink to="/swap" className={({ isActive }) => isActive ? "active" : ""}>Swap</NavLink>
           <NavLink to="/launch" className={({ isActive }) => isActive ? "active" : ""}>Launch a meme</NavLink>
         </nav>
 
@@ -84,6 +85,7 @@ export default function NavBar() {
               {menuOpen && (
                 <div className="wallet-menu__dropdown">
                   <Link to={`/profile/${address}`} onClick={() => setMenuOpen(false)}>My profile</Link>
+                  <Link to="/send" onClick={() => setMenuOpen(false)}>Send</Link>
                   <button onClick={copyAddress}>{copied ? "Copied ✓" : "Copy address"}</button>
                   <a href={explorerAddressUrl(address)} target="_blank" rel="noopener noreferrer">
                     View on Explorer ↗
@@ -111,6 +113,7 @@ export default function NavBar() {
           <div className="navbar__mobile-discover">
             <DiscoverMenu />
           </div>
+          <NavLink to="/swap" className={({ isActive }) => isActive ? "active" : ""}>Swap</NavLink>
           <NavLink to="/launch" className={({ isActive }) => isActive ? "active" : ""}>Launch a meme</NavLink>
         </nav>
       )}
