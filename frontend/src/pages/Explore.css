@@ -16,7 +16,7 @@
   transform: translateX(-50%);
   width: 640px;
   height: 420px;
-  background: radial-gradient(ellipse at center, rgba(124, 92, 252, 0.35), transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(0, 229, 208, 0.28), rgba(255, 62, 165, 0.12) 55%, transparent 75%);
   pointer-events: none;
   z-index: -1;
 }
@@ -80,15 +80,18 @@
 }
 
 .btn--primary {
-  background: var(--violet);
-  color: #0E0B1A;
-  box-shadow: 0 0 0 rgba(124, 92, 252, 0);
+  background: var(--holo);
+  background-size: 200% 200%;
+  background-position: 0% 50%;
+  color: var(--on-accent);
+  box-shadow: 0 0 0 rgba(0, 229, 208, 0);
+  transition: transform 0.12s ease, box-shadow 0.15s ease, background-position 0.3s ease;
 }
-.btn--primary:hover { background: var(--violet-hi); box-shadow: 0 8px 24px -8px rgba(124, 92, 252, 0.6); }
+.btn--primary:hover { background-position: 100% 50%; box-shadow: 0 8px 28px -8px rgba(0, 229, 208, 0.45); }
 .btn--primary:active { transform: scale(0.97); }
 
 .btn--ghost { border: 1px solid var(--border); color: var(--text); }
-.btn--ghost:hover { border-color: var(--violet-hi); background: rgba(124, 92, 252, 0.06); }
+.btn--ghost:hover { border-color: var(--violet-hi); background: rgba(0, 229, 208, 0.06); }
 
 .discover-section {
   max-width: 1000px;
@@ -198,12 +201,13 @@
   border-radius: 12px;
   overflow: hidden;
   transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  position: relative;
 }
 
 .meme-card:hover {
-  border-color: var(--violet-hi);
+  border-color: transparent;
   transform: translateY(-3px);
-  box-shadow: 0 12px 28px -12px rgba(124, 92, 252, 0.35);
+  box-shadow: 0 0 0 1.5px var(--violet-hi), 0 12px 28px -12px rgba(255, 62, 165, 0.35);
 }
 
 .meme-card--skeleton {

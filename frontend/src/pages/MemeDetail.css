@@ -103,7 +103,7 @@
   font-size: 0.9rem;
 }
 
-.trade__tabs button.active { background: var(--violet); color: #0E0B1A; }
+.trade__tabs button.active { background: var(--violet); color: var(--on-accent); }
 
 .meme-detail__trade label {
   display: flex;
@@ -129,7 +129,7 @@
 .trade__error { color: var(--pink); font-size: 0.85rem; margin: 0; }
 
 .trade__submit { border: none; width: 100%; }
-.trade__submit--sell { background: var(--pink); color: #0E0B1A; }
+.trade__submit--sell { background: var(--pink); color: var(--on-accent); }
 .trade__submit--sell:hover { background: #ff6b84; }
 .trade__submit:disabled { opacity: 0.55; cursor: default; }
 

@@ -54,7 +54,13 @@
   gap: 4px;
 }
 
-.token-row__badge { font-size: 0.75rem; }
+.token-row__badge {
+  font-size: 0.72rem;
+  padding: 1px 6px;
+  border-radius: 100px;
+  background: var(--holo);
+  filter: saturate(1.1);
+}
 
 .token-row__symbol {
   font-family: var(--font-mono);

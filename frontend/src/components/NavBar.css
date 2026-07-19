@@ -40,7 +40,7 @@
 
 .navbar__connect {
   background: var(--violet);
-  color: #0E0B1A;
+  color: var(--on-accent);
   border: none;
   font-weight: 600;
   font-size: 0.9rem;

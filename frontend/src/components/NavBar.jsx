@@ -34,8 +34,8 @@ export default function NavBar() {
     <header className="navbar">
       <Link to="/" className="navbar__brand">
         <svg className="navbar__mark" width="20" height="20" viewBox="0 0 32 32" aria-hidden="true">
-          <path d="M6 24 Q16 6 26 24" stroke="#9B82FF" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-          <circle cx="26" cy="24" r="2.4" fill="#39FF88" />
+          <path d="M6 24 Q16 6 26 24" stroke="#00E5D0" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+          <circle cx="26" cy="24" r="2.4" fill="#FF3EA5" />
         </svg>
         Arc Memes
       </Link>
