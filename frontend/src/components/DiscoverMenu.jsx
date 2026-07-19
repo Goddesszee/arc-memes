@@ -1,10 +1,11 @@
 import { useState, useRef, useEffect } from "react";
-import { useMemes } from "../lib/useMemes";
+import { useMemes } from "../lib/MemesContext";
 import TokenRow from "./TokenRow";
 import "./DiscoverMenu.css";
 
 const TABS = [
-  { key: "trending", label: "Trending" },
+  { key: "trending", label: "Hot" },
+  { key: "bondingSoon", label: "Bonding" },
   { key: "new", label: "New" },
   { key: "topMarketCap", label: "Top mkt cap" },
   { key: "graduated", label: "Graduated" },
@@ -57,7 +58,7 @@ export default function DiscoverMenu() {
               </p>
             )}
             {!loading && list.map((m, i) => (
-              <TokenRow meme={m} key={m.token} rank={i + 1} onClick={() => setOpen(false)} />
+              <TokenRow meme={m} key={m.token} rank={i + 1} onClick={() => setOpen(false)} variant={tab === "bondingSoon" ? "bonding" : undefined} />
             ))}
           </div>
         </div>

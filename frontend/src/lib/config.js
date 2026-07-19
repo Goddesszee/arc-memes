@@ -15,3 +15,4 @@ export const explorerTokenUrl = (addr) => `${EXPLORER_URL}/token/${addr}`;
 export const USDC_DECIMALS = 6;
 export const TOKEN_DECIMALS = 18;
 export const TOTAL_SUPPLY = 1_000_000_000; // matches MemeFactory.TOTAL_SUPPLY
+export const GRADUATION_THRESHOLD_USDC = 69_000; // matches BondingCurve.GRADUATION_THRESHOLD_USDC (human units)

@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useMemes } from "../lib/useMemes";
-import TickerTape from "../components/TickerTape";
+import { useMemes } from "../lib/MemesContext";
 import TokenRow from "../components/TokenRow";
 import "./Explore.css";
 
 const TABS = [
-  { key: "trending", label: "Trending", empty: "Nothing trending yet" },
+  { key: "trending", label: "Hot", empty: "Nothing trending yet" },
+  { key: "bondingSoon", label: "Bonding soon", empty: "Nothing close to graduating yet" },
   { key: "new", label: "New", empty: "No memes launched yet" },
   { key: "topMarketCap", label: "Top market cap", empty: "Nothing to rank yet" },
   { key: "graduated", label: "Graduated", empty: "None have graduated yet" },
@@ -15,12 +15,6 @@ const TABS = [
 export default function Explore() {
   const { memes, categories, loading, error } = useMemes();
   const [tab, setTab] = useState("trending");
-
-  const tickerData = memes.slice(0, 12).map((m, i) => ({
-    symbol: m.symbol,
-    up: i % 2 === 0,
-    changeLabel: m.priceUsdc ? `$${m.priceUsdc.toFixed(6)}` : "—",
-  }));
 
   const activeTab = TABS.find((t) => t.key === tab);
   const activeList = (categories[tab] || []).slice(0, 8);
@@ -43,8 +37,6 @@ export default function Explore() {
         </div>
       </section>
 
-      <TickerTape memes={tickerData} />
-
       <section className="discover-section">
         <div className="discover-section__tabs">
           {TABS.map((t) => (
@@ -65,7 +57,7 @@ export default function Explore() {
         {!loading && activeList.length > 0 && (
           <div className="discover-section__list">
             {activeList.map((m, i) => (
-              <TokenRow meme={m} key={m.token} rank={i + 1} />
+              <TokenRow meme={m} key={m.token} rank={i + 1} variant={tab === "bondingSoon" ? "bonding" : undefined} />
             ))}
           </div>
         )}

@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { WalletProvider } from "./lib/WalletContext";
 import { ThemeProvider } from "./lib/ThemeContext";
 import { ToastProvider } from "./lib/ToastContext";
+import { MemesProvider } from "./lib/MemesContext";
+import TopTicker from "./components/TopTicker";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import Explore from "./pages/Explore";
@@ -13,15 +15,20 @@ export default function App() {
     <ThemeProvider>
       <ToastProvider>
         <WalletProvider>
-          <BrowserRouter>
-            <NavBar />
-            <Routes>
-              <Route path="/" element={<Explore />} />
-              <Route path="/launch" element={<Launch />} />
-              <Route path="/meme/:tokenAddress" element={<MemeDetail />} />
-            </Routes>
-            <Footer />
-          </BrowserRouter>
+          <MemesProvider>
+            <BrowserRouter>
+              <div className="app-header">
+                <TopTicker />
+                <NavBar />
+              </div>
+              <Routes>
+                <Route path="/" element={<Explore />} />
+                <Route path="/launch" element={<Launch />} />
+                <Route path="/meme/:tokenAddress" element={<MemeDetail />} />
+              </Routes>
+              <Footer />
+            </BrowserRouter>
+          </MemesProvider>
         </WalletProvider>
       </ToastProvider>
     </ThemeProvider>

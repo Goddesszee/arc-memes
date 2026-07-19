@@ -7,7 +7,7 @@ function fmtUsd(n) {
   return `$${n.toFixed(2)}`;
 }
 
-export default function TokenRow({ meme, onClick, rank }) {
+export default function TokenRow({ meme, onClick, rank, variant }) {
   return (
     <Link to={`/meme/${meme.token}`} className="token-row" onClick={onClick}>
       {rank && <span className="token-row__rank">{rank}</span>}
@@ -21,10 +21,17 @@ export default function TokenRow({ meme, onClick, rank }) {
         </span>
         <span className="token-row__symbol">${meme.symbol}</span>
       </div>
-      <div className="token-row__stats">
-        <span className="token-row__mcap">{fmtUsd(meme.marketCapUsdc || 0)}</span>
-        <span className="token-row__label">mkt cap</span>
-      </div>
+      {variant === "bonding" ? (
+        <div className="token-row__stats">
+          <span className="token-row__mcap">{Math.round((meme.bondingProgress || 0) * 100)}%</span>
+          <span className="token-row__label">to graduate</span>
+        </div>
+      ) : (
+        <div className="token-row__stats">
+          <span className="token-row__mcap">{fmtUsd(meme.marketCapUsdc || 0)}</span>
+          <span className="token-row__label">mkt cap</span>
+        </div>
+      )}
     </Link>
   );
 }
