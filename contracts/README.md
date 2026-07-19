@@ -36,6 +36,17 @@ it deploys a `MemeToken` + `BondingCurve` pair per launched meme.
 After deploying, copy the printed `MemeFactory` address into
 `frontend/.env` as `VITE_FACTORY_ADDRESS`.
 
+## Update the launch fee (already deployed)
+
+`MemeFactory` has an owner-only `setLaunchFee()`, so you don't need to
+redeploy to change the fee — only the deployer wallet can call this:
+
+```bash
+FACTORY_ADDRESS=0x0C68748f5eF6d59739086beFa892356fb18B0951 NEW_FEE=2000000 npx hardhat run scripts/set-launch-fee.js --network arcTestnet
+```
+
+`NEW_FEE` is in USDC base units (6 decimals) — `2000000` = 2 USDC.
+
 ## Contracts
 
 - **`MemeFactory.sol`** — `launchMeme(name, symbol, imageURI)` charges the
