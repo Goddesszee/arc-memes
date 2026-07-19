@@ -28,8 +28,8 @@ export default function Explore() {
           Every meme starts<br />as a <span className="hero__accent">curve.</span>
         </h1>
         <p className="hero__sub">
-          Launch a token for your meme in one transaction. No liquidity to seed —
-          the bonding curve prices it from the first buy.
+          Launch a token for your meme in one transaction. No liquidity to seed.
+          The bonding curve prices it from the first buy.
         </p>
         <div className="hero__cta">
           <Link to="/launch" className="btn btn--primary">Launch a meme</Link>
@@ -95,7 +95,7 @@ export default function Explore() {
           <div className="empty-state">
             <div className="empty-state__mark">◇</div>
             <p>No memes launched yet</p>
-            <span>Be the first — it takes about a minute.</span>
+            <span>Be the first. It takes about a minute.</span>
             <Link to="/launch" className="btn btn--primary" style={{ marginTop: 20 }}>Launch a meme</Link>
           </div>
         )}
@@ -111,7 +111,7 @@ export default function Explore() {
                   <span className="meme-card__name">{m.name}</span>
                   <span className="meme-card__symbol">${m.symbol}</span>
                   <span className="meme-card__price">
-                    {m.priceUsdc ? `$${m.priceUsdc.toFixed(6)}` : "pre-launch"}
+                    {m.priceUsdc ? `$${m.priceUsdc.toFixed(6)}` : "pre launch"}
                   </span>
                 </div>
               </Link>

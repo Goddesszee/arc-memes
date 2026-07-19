@@ -21,21 +21,21 @@ export async function buildShareCard(meme, priceUsdc) {
   const ctx = canvas.getContext("2d");
 
   // Background
-  ctx.fillStyle = "#0A1416";
+  ctx.fillStyle = "#0A0E1A";
   ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
   // Holo gradient accent bar at the top
   const barGradient = ctx.createLinearGradient(0, 0, WIDTH, 0);
-  barGradient.addColorStop(0, "#00E5D0");
-  barGradient.addColorStop(0.5, "#FF3EA5");
-  barGradient.addColorStop(1, "#FFD166");
+  barGradient.addColorStop(0, "#0A3FDB");
+  barGradient.addColorStop(0.5, "#3D7BFF");
+  barGradient.addColorStop(1, "#8FC1FF");
   ctx.fillStyle = barGradient;
   ctx.fillRect(0, 0, WIDTH, 10);
 
   // Soft glow behind the logo
   const glow = ctx.createRadialGradient(220, 300, 20, 220, 300, 260);
-  glow.addColorStop(0, "rgba(0, 229, 208, 0.25)");
-  glow.addColorStop(1, "rgba(0, 229, 208, 0)");
+  glow.addColorStop(0, "rgba(61, 123, 255, 0.25)");
+  glow.addColorStop(1, "rgba(61, 123, 255, 0)");
   ctx.fillStyle = glow;
   ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
@@ -53,45 +53,45 @@ export async function buildShareCard(meme, priceUsdc) {
       const img = await loadImage(meme.imageURI);
       ctx.drawImage(img, logoX, logoY, logoSize, logoSize);
     } catch {
-      ctx.fillStyle = "#17262C";
+      ctx.fillStyle = "#171D38";
       ctx.fillRect(logoX, logoY, logoSize, logoSize);
     }
   } else {
-    ctx.fillStyle = "#17262C";
+    ctx.fillStyle = "#171D38";
     ctx.fillRect(logoX, logoY, logoSize, logoSize);
   }
   ctx.restore();
-  ctx.strokeStyle = "#1E2E35";
+  ctx.strokeStyle = "#232B4D";
   ctx.lineWidth = 2;
   ctx.beginPath();
   ctx.arc(logoX + logoSize / 2, logoY + logoSize / 2, logoSize / 2, 0, Math.PI * 2);
   ctx.stroke();
 
   // Name
-  ctx.fillStyle = "#EAF6F5";
+  ctx.fillStyle = "#F5F7FF";
   ctx.font = "700 64px 'Space Grotesk', sans-serif";
   ctx.textBaseline = "alphabetic";
   ctx.fillText(meme.name, 400, 280);
 
   // Symbol
-  ctx.fillStyle = "#7C9499";
+  ctx.fillStyle = "#8890A6";
   ctx.font = "500 36px 'JetBrains Mono', monospace";
   ctx.fillText(`$${meme.symbol}`, 400, 330);
 
   // Price
-  ctx.fillStyle = "#00E5D0";
+  ctx.fillStyle = "#3D7BFF";
   ctx.font = "700 52px 'JetBrains Mono', monospace";
   const priceLabel = priceUsdc ? `$${priceUsdc.toFixed(6)}` : "pre-launch";
   ctx.fillText(priceLabel, 400, 420);
-  ctx.fillStyle = "#7C9499";
+  ctx.fillStyle = "#8890A6";
   ctx.font = "400 26px 'Inter', sans-serif";
   ctx.fillText("per token", 400, 455);
 
   // Footer branding
-  ctx.fillStyle = "#EAF6F5";
+  ctx.fillStyle = "#F5F7FF";
   ctx.font = "700 30px 'Space Grotesk', sans-serif";
   ctx.fillText("Arc Memes", 110, 560);
-  ctx.fillStyle = "#7C9499";
+  ctx.fillStyle = "#8890A6";
   ctx.font = "400 24px 'Inter', sans-serif";
   ctx.fillText("Launch & trade memes on Arc", 300, 560);
 

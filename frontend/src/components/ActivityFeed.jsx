@@ -26,7 +26,7 @@ export default function ActivityFeed({ curveAddress, symbol }) {
 
   if (loading) return <p className="activity-feed__empty">Loading activity…</p>;
   if (error) return <p className="activity-feed__empty">Couldn't load activity.</p>;
-  if (recent.length === 0) return <p className="activity-feed__empty">No trades yet — be the first.</p>;
+  if (recent.length === 0) return <p className="activity-feed__empty">No trades yet. Be the first.</p>;
 
   return (
     <div className="activity-feed">

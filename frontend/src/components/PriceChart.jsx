@@ -43,7 +43,7 @@ export default function PriceChart({ curveAddress }) {
   if (data.length < 2) {
     return (
       <div className="price-chart price-chart--empty">
-        Not enough trades yet for a chart — needs at least 2.
+        Not enough trades yet for a chart. Needs at least 2.
       </div>
     );
   }
@@ -54,9 +54,9 @@ export default function PriceChart({ curveAddress }) {
         <LineChart data={data} margin={{ top: 8, right: 8, bottom: 0, left: 0 }}>
           <defs>
             <linearGradient id="priceLineGradient" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stopColor="#00E5D0" />
-              <stop offset="50%" stopColor="#FF3EA5" />
-              <stop offset="100%" stopColor="#FFD166" />
+              <stop offset="0%" stopColor="#0A3FDB" />
+              <stop offset="50%" stopColor="#3D7BFF" />
+              <stop offset="100%" stopColor="#8FC1FF" />
             </linearGradient>
           </defs>
           <XAxis dataKey="i" hide />

@@ -69,7 +69,7 @@ export default function Profile() {
         setDraftAvatar(avatarURI);
       }
     } catch {
-      // registry not deployed yet — leave defaults
+      // registry not deployed yet, leave defaults
     }
 
     try {
@@ -214,7 +214,7 @@ export default function Profile() {
                 </div>
               ))}
               <div className="balance-row balance-row--total">
-                <span>USDC + EURC combined (face value, not FX-adjusted)</span>
+                <span>USDC + EURC combined (face value, not FX adjusted)</span>
                 <span>{totalStableValue.toFixed(2)}</span>
               </div>
             </div>

@@ -46,7 +46,7 @@ export default function Launch() {
     try {
       const dataUri = await fileToLogoDataUri(file);
       if (dataUri.length > MAX_LOGO_CHARS) {
-        setLogoError("Image is too large even after compression — try a simpler image.");
+        setLogoError("Image is too large even after compression. Try a simpler image.");
         setProcessingLogo(false);
         return;
       }
@@ -72,7 +72,7 @@ export default function Launch() {
       return;
     }
     if (!FACTORY_ADDRESS) {
-      setError("Contracts aren't deployed yet — set VITE_FACTORY_ADDRESS to enable launching.");
+      setError("Contracts aren't deployed yet. Set VITE_FACTORY_ADDRESS to enable launching.");
       return;
     }
 
@@ -126,7 +126,7 @@ export default function Launch() {
         <h1>Launch a meme</h1>
         <p className="launch__sub">
           Give it a name, a symbol, and a logo. Your token deploys with its own
-          bonding curve — trading opens the moment it's live.
+          bonding curve. Trading opens the moment it's live.
         </p>
 
         <form onSubmit={handleSubmit} className="launch__form">

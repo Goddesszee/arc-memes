@@ -154,7 +154,7 @@ export default function MemeDetail() {
           <h1>{meme.name}</h1>
           <span className="meme-detail__symbol">${meme.symbol}</span>
           <span className="meme-detail__price">
-            {price ? `$${price.toFixed(6)}` : "—"} <small>per token</small>
+            {price ? `$${price.toFixed(6)}` : "N/A"} <small>per token</small>
           </span>
           <p className="meme-detail__creator">
             Created by <Link className="mono" to={`/profile/${meme.creator}`}>

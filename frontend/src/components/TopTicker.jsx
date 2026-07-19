@@ -3,7 +3,7 @@ import { useMemes } from "../lib/MemesContext";
 import "./TopTicker.css";
 
 function fmtPrice(n) {
-  if (!n) return "—";
+  if (!n) return "N/A";
   if (n < 0.01) return `$${n.toFixed(6)}`;
   return `$${n.toFixed(4)}`;
 }

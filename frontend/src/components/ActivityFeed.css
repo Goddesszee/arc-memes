@@ -30,8 +30,8 @@
   flex-shrink: 0;
 }
 
-.activity-row__badge--buy { background: rgba(0, 229, 208, 0.14); color: var(--violet); }
-.activity-row__badge--sell { background: rgba(255, 62, 107, 0.14); color: var(--pink); }
+.activity-row__badge--buy { background: color-mix(in srgb, var(--violet) 14%, transparent); color: var(--violet); }
+.activity-row__badge--sell { background: color-mix(in srgb, var(--pink) 14%, transparent); color: var(--pink); }
 
 .activity-row__trader {
   font-family: var(--font-mono);
