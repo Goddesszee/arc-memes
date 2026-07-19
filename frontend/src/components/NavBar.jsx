@@ -1,5 +1,8 @@
+import { useState, useRef, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useWallet } from "../lib/WalletContext";
+import { explorerAddressUrl } from "../lib/config";
+import ThemeToggle from "./ThemeToggle";
 import "./NavBar.css";
 
 function shortAddr(addr) {
@@ -7,7 +10,24 @@ function shortAddr(addr) {
 }
 
 export default function NavBar() {
-  const { address, connecting, error, connect } = useWallet();
+  const { address, connecting, error, connect, disconnect } = useWallet();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    function onClickOutside(e) {
+      if (menuRef.current && !menuRef.current.contains(e.target)) setMenuOpen(false);
+    }
+    document.addEventListener("mousedown", onClickOutside);
+    return () => document.removeEventListener("mousedown", onClickOutside);
+  }, []);
+
+  async function copyAddress() {
+    await navigator.clipboard.writeText(address);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  }
 
   return (
     <header className="navbar">
@@ -24,10 +44,29 @@ export default function NavBar() {
         <NavLink to="/launch" className={({ isActive }) => isActive ? "active" : ""}>Launch a meme</NavLink>
       </nav>
 
-      <div className="navbar__wallet">
+      <div className="navbar__actions">
+        <ThemeToggle />
+
         {error && <span className="navbar__error" title={error}>Connection failed</span>}
+
         {address ? (
-          <span className="navbar__address">{shortAddr(address)}</span>
+          <div className="wallet-menu" ref={menuRef}>
+            <button className="navbar__address" onClick={() => setMenuOpen((v) => !v)}>
+              <span className="navbar__dot" />
+              {shortAddr(address)}
+            </button>
+            {menuOpen && (
+              <div className="wallet-menu__dropdown">
+                <button onClick={copyAddress}>{copied ? "Copied ✓" : "Copy address"}</button>
+                <a href={explorerAddressUrl(address)} target="_blank" rel="noopener noreferrer">
+                  View on Explorer ↗
+                </a>
+                <button className="wallet-menu__disconnect" onClick={() => { disconnect(); setMenuOpen(false); }}>
+                  Disconnect
+                </button>
+              </div>
+            )}
+          </div>
         ) : (
           <button className="navbar__connect" onClick={connect} disabled={connecting}>
             {connecting ? "Connecting…" : "Connect wallet"}

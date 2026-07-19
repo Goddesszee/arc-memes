@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Contract, parseUnits } from "ethers";
 import { useWallet } from "../lib/WalletContext";
-import { FACTORY_ADDRESS, USDC_ADDRESS, USDC_DECIMALS } from "../lib/config";
+import { useToast } from "../lib/ToastContext";
+import { FACTORY_ADDRESS, USDC_ADDRESS, explorerTxUrl } from "../lib/config";
 import { FACTORY_ABI, ERC20_ABI } from "../lib/abis";
 import "./Launch.css";
 
@@ -15,6 +16,7 @@ const STEPS = {
 
 export default function Launch() {
   const { address, signer, connect } = useWallet();
+  const { push } = useToast();
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
@@ -47,8 +49,8 @@ export default function Launch() {
         const allowance = await usdc.allowance(address, FACTORY_ADDRESS);
         if (allowance < fee) {
           setStep(STEPS.APPROVING);
-          const tx = await usdc.approve(FACTORY_ADDRESS, fee);
-          await tx.wait();
+          const approveTx = await usdc.approve(FACTORY_ADDRESS, fee);
+          await approveTx.wait();
         }
       }
 
@@ -61,13 +63,23 @@ export default function Launch() {
         .find((parsed) => parsed && parsed.name === "MemeLaunched");
 
       setStep(STEPS.DONE);
+
+      push({
+        title: `$${symbol.trim().toUpperCase()} launched`,
+        message: `${receipt.hash.slice(0, 10)}…`,
+        variant: "success",
+        explorerUrl: explorerTxUrl(receipt.hash),
+      });
+
       if (launchedEvent) {
         navigate(`/meme/${launchedEvent.args.token}`);
       } else {
         navigate("/");
       }
     } catch (err) {
-      setError(err.shortMessage || err.message || "Launch failed");
+      const message = err.shortMessage || err.message || "Launch failed";
+      setError(message);
+      push({ title: "Launch failed", message, variant: "error" });
       setStep(STEPS.IDLE);
     }
   }

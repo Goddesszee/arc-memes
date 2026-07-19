@@ -61,7 +61,18 @@
 .meme-detail__price small { color: var(--muted); font-size: 0.85rem; font-weight: 400; }
 
 .meme-detail__creator { color: var(--muted); font-size: 0.85rem; margin-top: 16px; }
+.meme-detail__creator a { color: var(--violet-hi); }
+.meme-detail__creator a:hover { text-decoration: underline; }
 .mono { font-family: var(--font-mono); }
+
+.meme-detail__explorer-link {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: var(--violet-hi);
+  font-weight: 500;
+}
+.meme-detail__explorer-link:hover { text-decoration: underline; }
 
 .meme-detail__trade {
   background: var(--surface);

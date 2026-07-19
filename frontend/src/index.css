@@ -15,6 +15,19 @@
   --font-mono: 'JetBrains Mono', monospace;
 }
 
+[data-theme="light"] {
+  --bg: #FBFAFE;
+  --surface: #FFFFFF;
+  --surface-hi: #F1EEFB;
+  --border: #E3DEF3;
+  --violet: #6A4CE0;
+  --violet-hi: #5638C9;
+  --lime: #1CAE5C;
+  --pink: #E23A57;
+  --text: #17132A;
+  --muted: #6B6483;
+}
+
 * { box-sizing: border-box; }
 
 html, body {
@@ -24,6 +37,7 @@ html, body {
   color: var(--text);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 #root {
