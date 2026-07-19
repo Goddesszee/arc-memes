@@ -22,7 +22,7 @@
 }
 
 .navbar__mark {
-  color: var(--violet-hi);
+  display: block;
 }
 
 .navbar__links {
