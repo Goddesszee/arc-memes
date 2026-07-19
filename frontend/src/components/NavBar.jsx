@@ -4,6 +4,7 @@ import { useWallet } from "../lib/WalletContext";
 import { explorerAddressUrl } from "../lib/config";
 import ThemeToggle from "./ThemeToggle";
 import DiscoverMenu from "./DiscoverMenu";
+import SearchBar from "./SearchBar";
 import "./NavBar.css";
 
 function shortAddr(addr) {
@@ -65,6 +66,10 @@ export default function NavBar() {
           <NavLink to="/launch" className={({ isActive }) => isActive ? "active" : ""}>Launch a meme</NavLink>
         </nav>
 
+        <div className="navbar__search">
+          <SearchBar />
+        </div>
+
         <div className="navbar__actions">
           <ThemeToggle />
 
@@ -99,6 +104,9 @@ export default function NavBar() {
 
       {mobileNavOpen && (
         <nav className="navbar__mobile-panel">
+          <div className="navbar__mobile-search">
+            <SearchBar onNavigate={() => setMobileNavOpen(false)} />
+          </div>
           <NavLink to="/" end className={({ isActive }) => isActive ? "active" : ""}>Explore</NavLink>
           <div className="navbar__mobile-discover">
             <DiscoverMenu />

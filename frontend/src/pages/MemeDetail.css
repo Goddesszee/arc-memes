@@ -133,6 +133,41 @@
   color: var(--muted);
 }
 
+.trade__label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.trade__balance {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.trade__pct-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin-top: -6px;
+}
+
+.trade__pct-row button {
+  background: var(--surface-hi);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 7px 0;
+  border-radius: 6px;
+  transition: border-color 0.12s ease, color 0.12s ease;
+}
+
+.trade__pct-row button:hover {
+  border-color: var(--violet-hi);
+  color: var(--text);
+}
+
 .meme-detail__trade input {
   background: var(--bg);
   border: 1px solid var(--border);

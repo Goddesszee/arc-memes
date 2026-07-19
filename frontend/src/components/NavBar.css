@@ -42,19 +42,24 @@
   gap: 24px;
   font-size: 0.95rem;
   color: var(--muted);
-  flex: 1;
-  min-width: 0;
+  flex-shrink: 0;
 }
 
 .navbar__links a { transition: color 0.15s ease; }
 .navbar__links a:hover { color: var(--text); }
 .navbar__links a.active { color: var(--text); }
 
+.navbar__search {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+}
+
 .navbar__actions {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-left: auto;
 }
 
 .navbar__connect {
@@ -152,6 +157,7 @@
   .navbar__hamburger { display: flex; }
 
   .navbar__links { display: none; }
+  .navbar__search { display: none; }
 
   .navbar__brand { font-size: 1.05rem; }
 
@@ -166,6 +172,12 @@
     gap: 2px;
     animation: mobile-panel-in 0.15s ease;
   }
+
+  .navbar__mobile-search {
+    margin-bottom: 8px;
+  }
+
+  .navbar__mobile-search .search-bar { max-width: none; }
 
   .navbar__mobile-panel > a {
     padding: 12px 8px;

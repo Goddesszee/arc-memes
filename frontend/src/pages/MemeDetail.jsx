@@ -24,6 +24,30 @@ export default function MemeDetail() {
   const [error, setError] = useState(null);
   const [txStatus, setTxStatus] = useState(null);
   const [activityVersion, setActivityVersion] = useState(0);
+  const [usdcBalance, setUsdcBalance] = useState(0);
+  const [tokenBalance, setTokenBalance] = useState(0);
+
+  const loadBalances = useCallback(async (memeData) => {
+    if (!address || !memeData) {
+      setUsdcBalance(0);
+      setTokenBalance(0);
+      return;
+    }
+    try {
+      const provider = getReadProvider();
+      const usdc = new Contract(USDC_ADDRESS, ERC20_ABI, provider);
+      const token = new Contract(memeData.token, ERC20_ABI, provider);
+      const [usdcRaw, tokenRaw] = await Promise.all([
+        usdc.balanceOf(address),
+        token.balanceOf(address),
+      ]);
+      setUsdcBalance(Number(formatUnits(usdcRaw, 6)));
+      setTokenBalance(Number(formatUnits(tokenRaw, 18)));
+    } catch {
+      setUsdcBalance(0);
+      setTokenBalance(0);
+    }
+  }, [address]);
 
   const load = useCallback(async () => {
     if (!FACTORY_ADDRESS) return;
@@ -42,6 +66,7 @@ export default function MemeDetail() {
   }, [tokenAddress]);
 
   useEffect(() => { load(); }, [load]);
+  useEffect(() => { loadBalances(meme); }, [meme, loadBalances]);
 
   async function handleTrade(e) {
     e.preventDefault();
@@ -91,6 +116,7 @@ export default function MemeDetail() {
       });
       setAmount("");
       await load();
+      await loadBalances(meme);
       setActivityVersion((v) => v + 1);
     } catch (err) {
       const message = err.shortMessage || err.message || "Transaction failed";
@@ -99,6 +125,13 @@ export default function MemeDetail() {
     } finally {
       setBusy(false);
     }
+  }
+
+  function setPct(pct) {
+    const base = mode === "buy" ? usdcBalance : tokenBalance;
+    const value = base * pct;
+    if (value <= 0) return;
+    setAmount(String(parseFloat(value.toFixed(6))));
   }
 
   if (!FACTORY_ADDRESS) {
@@ -152,7 +185,14 @@ export default function MemeDetail() {
           </div>
 
           <label>
-            {mode === "buy" ? "USDC to spend" : "Tokens to sell"}
+            <span className="trade__label-row">
+              {mode === "buy" ? "USDC to spend" : "Tokens to sell"}
+              {address && (
+                <span className="trade__balance">
+                  Balance: {mode === "buy" ? usdcBalance.toLocaleString(undefined, { maximumFractionDigits: 2 }) : tokenBalance.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                </span>
+              )}
+            </span>
             <input
               type="number"
               min="0"
@@ -162,6 +202,15 @@ export default function MemeDetail() {
               onChange={(e) => setAmount(e.target.value)}
             />
           </label>
+
+          {address && (
+            <div className="trade__pct-row">
+              <button type="button" onClick={() => setPct(0.25)}>25%</button>
+              <button type="button" onClick={() => setPct(0.5)}>50%</button>
+              <button type="button" onClick={() => setPct(0.75)}>75%</button>
+              <button type="button" onClick={() => setPct(1)}>Max</button>
+            </div>
+          )}
 
           {txStatus && <p className="trade__status">{txStatus}</p>}
           {error && <p className="trade__error">{error}</p>}
