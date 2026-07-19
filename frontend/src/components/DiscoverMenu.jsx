@@ -58,7 +58,7 @@ export default function DiscoverMenu() {
               </p>
             )}
             {!loading && list.map((m, i) => (
-              <TokenRow meme={m} key={m.token} rank={i + 1} onClick={() => setOpen(false)} variant={tab === "bondingSoon" ? "bonding" : undefined} />
+              <TokenRow meme={m} key={m.token} rank={i + 1} onClick={() => setOpen(false)} variant={tab === "bondingSoon" ? "bonding" : tab === "trending" ? "volume" : undefined} />
             ))}
           </div>
         </div>

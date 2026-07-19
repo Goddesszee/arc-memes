@@ -28,6 +28,11 @@ export default function TokenRow({ meme, onClick, rank, variant }) {
           <span className="token-row__mcap">{Math.round((meme.bondingProgress || 0) * 100)}%</span>
           <span className="token-row__label">to graduate</span>
         </div>
+      ) : variant === "volume" ? (
+        <div className="token-row__stats">
+          <span className="token-row__mcap">{fmtUsd(meme.volume24h || 0)}</span>
+          <span className="token-row__label">24h vol</span>
+        </div>
       ) : (
         <div className="token-row__stats">
           <span className="token-row__mcap">{fmtUsd(meme.marketCapUsdc || 0)}</span>

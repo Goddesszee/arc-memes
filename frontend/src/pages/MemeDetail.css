@@ -65,14 +65,34 @@
 .meme-detail__creator a:hover { text-decoration: underline; }
 .mono { font-family: var(--font-mono); }
 
-.meme-detail__explorer-link {
-  display: inline-block;
+.meme-detail__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
   margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.meme-detail__explorer-link {
   font-size: 0.85rem;
   color: var(--violet-hi);
   font-weight: 500;
 }
 .meme-detail__explorer-link:hover { text-decoration: underline; }
+
+.meme-detail__chart {
+  margin-top: 24px;
+}
+
+.meme-detail__activity {
+  margin-top: 24px;
+}
+
+.meme-detail__activity h2 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  margin: 0 0 10px;
+}
 
 .meme-detail__trade {
   background: var(--surface);

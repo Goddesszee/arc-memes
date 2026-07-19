@@ -3,6 +3,7 @@ import { Contract, formatUnits } from "ethers";
 import { getReadProvider } from "./provider";
 import { FACTORY_ADDRESS, TOTAL_SUPPLY, GRADUATION_THRESHOLD_USDC } from "./config";
 import { FACTORY_ABI, CURVE_ABI } from "./abis";
+import { getVolume24h } from "./volume";
 
 const MemesContext = createContext(null);
 const REFRESH_MS = 30_000;
@@ -37,11 +38,12 @@ export function MemesProvider({ children }) {
           };
           try {
             const curve = new Contract(m.curve, CURVE_ABI, provider);
-            const [priceRaw, tokenReserveRaw, realReserveRaw, graduated] = await Promise.all([
+            const [priceRaw, tokenReserveRaw, realReserveRaw, graduated, volume24h] = await Promise.all([
               curve.spotPriceUsdcPerToken(),
               curve.tokenReserve(),
               curve.realUsdcReserve(),
               curve.isGraduated(),
+              getVolume24h(m.curve, provider),
             ]);
             const priceUsdc = Number(formatUnits(priceRaw, 18));
             const tokenReserve = Number(formatUnits(tokenReserveRaw, 18));
@@ -50,9 +52,9 @@ export function MemesProvider({ children }) {
             const marketCapUsdc = priceUsdc * circulatingSupply;
             const bondingProgress = Math.min(realUsdc / GRADUATION_THRESHOLD_USDC, 1);
 
-            return { ...base, priceUsdc, circulatingSupply, marketCapUsdc, graduated, bondingProgress };
+            return { ...base, priceUsdc, circulatingSupply, marketCapUsdc, graduated, bondingProgress, volume24h };
           } catch {
-            return { ...base, priceUsdc: 0, circulatingSupply: 0, marketCapUsdc: 0, graduated: false, bondingProgress: 0 };
+            return { ...base, priceUsdc: 0, circulatingSupply: 0, marketCapUsdc: 0, graduated: false, bondingProgress: 0, volume24h: 0 };
           }
         })
       );
@@ -82,16 +84,19 @@ export function MemesProvider({ children }) {
       .filter((m) => !m.graduated)
       .sort((a, b) => b.bondingProgress - a.bondingProgress);
 
-    // Heuristic: recency-weighted market cap. Favors tokens that have built
-    // up cap quickly rather than just whatever is biggest overall. A real
-    // volume-based ranking needs indexed Buy/Sell events, which this app
-    // doesn't index yet.
+    // Real trending: sorted by actual 24h trade volume (from Buy/Sell
+    // events), not a proxy. Falls back to a recency-weighted market cap
+    // score as a tiebreaker when volume is flat (e.g. everything's at 0
+    // during a quiet period) so the list still has a sensible order.
     const trending = [...memes]
       .map((m) => {
         const ageHours = Math.max((now - m.launchedAt) / 3600, 0.5);
-        return { ...m, _trendScore: m.marketCapUsdc / ageHours };
+        return { ...m, _trendTiebreak: m.marketCapUsdc / ageHours };
       })
-      .sort((a, b) => b._trendScore - a._trendScore);
+      .sort((a, b) => {
+        if (b.volume24h !== a.volume24h) return b.volume24h - a.volume24h;
+        return b._trendTiebreak - a._trendTiebreak;
+      });
 
     return { trending, new: byNew, topMarketCap: byMarketCap, graduated, bondingSoon };
   }, [memes]);

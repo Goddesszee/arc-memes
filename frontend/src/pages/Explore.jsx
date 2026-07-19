@@ -57,7 +57,7 @@ export default function Explore() {
         {!loading && activeList.length > 0 && (
           <div className="discover-section__list">
             {activeList.map((m, i) => (
-              <TokenRow meme={m} key={m.token} rank={i + 1} variant={tab === "bondingSoon" ? "bonding" : undefined} />
+              <TokenRow meme={m} key={m.token} rank={i + 1} variant={tab === "bondingSoon" ? "bonding" : tab === "trending" ? "volume" : undefined} />
             ))}
           </div>
         )}

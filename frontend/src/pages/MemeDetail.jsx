@@ -6,6 +6,9 @@ import { useWallet } from "../lib/WalletContext";
 import { useToast } from "../lib/ToastContext";
 import { FACTORY_ADDRESS, USDC_ADDRESS, explorerTxUrl, explorerTokenUrl } from "../lib/config";
 import { FACTORY_ABI, CURVE_ABI, ERC20_ABI } from "../lib/abis";
+import PriceChart from "../components/PriceChart";
+import ActivityFeed from "../components/ActivityFeed";
+import ShareButton from "../components/ShareButton";
 import "./MemeDetail.css";
 
 export default function MemeDetail() {
@@ -20,6 +23,7 @@ export default function MemeDetail() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(null);
   const [txStatus, setTxStatus] = useState(null);
+  const [activityVersion, setActivityVersion] = useState(0);
 
   const load = useCallback(async () => {
     if (!FACTORY_ADDRESS) return;
@@ -87,6 +91,7 @@ export default function MemeDetail() {
       });
       setAmount("");
       await load();
+      setActivityVersion((v) => v + 1);
     } catch (err) {
       const message = err.shortMessage || err.message || "Transaction failed";
       setError(message);
@@ -123,9 +128,21 @@ export default function MemeDetail() {
               {meme.creator.slice(0, 6)}…{meme.creator.slice(-4)}
             </Link>
           </p>
-          <a className="meme-detail__explorer-link" href={explorerTokenUrl(meme.token)} target="_blank" rel="noopener noreferrer">
-            View token on Explorer ↗
-          </a>
+          <div className="meme-detail__actions">
+            <a className="meme-detail__explorer-link" href={explorerTokenUrl(meme.token)} target="_blank" rel="noopener noreferrer">
+              View token on Explorer ↗
+            </a>
+            <ShareButton meme={meme} priceUsdc={price} />
+          </div>
+
+          <div className="meme-detail__chart">
+            <PriceChart key={`chart-${activityVersion}`} curveAddress={meme.curve} />
+          </div>
+
+          <div className="meme-detail__activity">
+            <h2>Activity</h2>
+            <ActivityFeed key={`activity-${activityVersion}`} curveAddress={meme.curve} symbol={meme.symbol} />
+          </div>
         </div>
 
         <form className="meme-detail__trade" onSubmit={handleTrade}>

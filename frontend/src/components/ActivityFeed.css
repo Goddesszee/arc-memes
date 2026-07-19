@@ -1,0 +1,58 @@
+.activity-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.activity-feed__empty {
+  color: var(--muted);
+  font-size: 0.85rem;
+  padding: 20px 0;
+}
+
+.activity-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  transition: background 0.12s ease;
+}
+
+.activity-row:hover { background: var(--surface-hi); }
+
+.activity-row__badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 100px;
+  flex-shrink: 0;
+}
+
+.activity-row__badge--buy { background: rgba(0, 229, 208, 0.14); color: var(--violet); }
+.activity-row__badge--sell { background: rgba(255, 62, 107, 0.14); color: var(--pink); }
+
+.activity-row__trader {
+  font-family: var(--font-mono);
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.activity-row__amount {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  color: var(--text);
+}
+
+.activity-row__time {
+  color: var(--muted);
+  font-size: 0.75rem;
+  width: 52px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+  .activity-row__trader { display: none; }
+}
