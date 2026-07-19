@@ -110,3 +110,8 @@
   opacity: 0.55;
   cursor: default;
 }
+
+@media (max-width: 640px) {
+  .launch { padding: 40px 20px; }
+  .launch__card h1 { font-size: 1.6rem; }
+}

@@ -41,6 +41,8 @@ html, body {
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   transition: background 0.2s ease, color 0.2s ease;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 #root {

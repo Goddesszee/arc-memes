@@ -71,7 +71,3 @@
   padding: 24px 12px;
   margin: 0;
 }
-
-@media (max-width: 640px) {
-  .discover-menu__panel { position: fixed; left: 16px; right: 16px; width: auto; top: 68px; }
-}
