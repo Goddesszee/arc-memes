@@ -90,35 +90,46 @@
 .btn--ghost { border: 1px solid var(--border); color: var(--text); }
 .btn--ghost:hover { border-color: var(--violet-hi); background: rgba(124, 92, 252, 0.06); }
 
-.steps {
+.discover-section {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 64px 32px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
+  padding: 48px 32px;
   border-bottom: 1px solid var(--border);
 }
 
-.step__n {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--violet-hi);
-  margin-bottom: 12px;
+.discover-section__tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
 }
 
-.step h3 {
-  font-family: var(--font-display);
-  font-size: 1.1rem;
-  margin: 0 0 8px;
-}
-
-.step p {
+.discover-section__tabs button {
+  white-space: nowrap;
+  background: none;
+  border: none;
   color: var(--muted);
-  font-size: 0.9rem;
-  line-height: 1.55;
-  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-bottom: 2px solid transparent;
+}
+
+.discover-section__tabs button.active {
+  color: var(--violet-hi);
+  border-bottom-color: var(--violet-hi);
+}
+
+.discover-section__list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4px;
+}
+
+@media (max-width: 640px) {
+  .discover-section { padding: 32px 16px; }
+  .discover-section__list { grid-template-columns: 1fr; }
 }
 
 .grid-section {
@@ -250,10 +261,6 @@
   color: var(--lime);
   font-size: 0.85rem;
   margin-top: 4px;
-}
-
-@media (max-width: 720px) {
-  .steps { grid-template-columns: 1fr; gap: 28px; }
 }
 
 @media (max-width: 640px) {

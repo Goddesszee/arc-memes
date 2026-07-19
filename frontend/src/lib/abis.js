@@ -12,6 +12,7 @@ export const CURVE_ABI = [
   "function spotPriceUsdcPerToken() view returns (uint256)",
   "function realUsdcReserve() view returns (uint256)",
   "function tokenReserve() view returns (uint256)",
+  "function isGraduated() view returns (bool)",
   "event Buy(address indexed buyer, uint256 usdcIn, uint256 feeAmount, uint256 tokensOut)",
   "event Sell(address indexed seller, uint256 tokensIn, uint256 usdcOut, uint256 feeAmount)"
 ];

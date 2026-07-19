@@ -1,22 +1,29 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMemes } from "../lib/useMemes";
 import TickerTape from "../components/TickerTape";
+import TokenRow from "../components/TokenRow";
 import "./Explore.css";
 
-const STEPS = [
-  { n: "01", title: "Launch", body: "Name it, symbol it, drop an image. One transaction, a small USDC fee." },
-  { n: "02", title: "Curve goes live", body: "A bonding curve deploys with it — price starts moving on the first buy." },
-  { n: "03", title: "Trade instantly", body: "Anyone swaps USDC in or out against the curve. No liquidity pool required." },
+const TABS = [
+  { key: "trending", label: "Trending", empty: "Nothing trending yet" },
+  { key: "new", label: "New", empty: "No memes launched yet" },
+  { key: "topMarketCap", label: "Top market cap", empty: "Nothing to rank yet" },
+  { key: "graduated", label: "Graduated", empty: "None have graduated yet" },
 ];
 
 export default function Explore() {
-  const { memes, loading, error } = useMemes();
+  const { memes, categories, loading, error } = useMemes();
+  const [tab, setTab] = useState("trending");
 
   const tickerData = memes.slice(0, 12).map((m, i) => ({
     symbol: m.symbol,
     up: i % 2 === 0,
     changeLabel: m.priceUsdc ? `$${m.priceUsdc.toFixed(6)}` : "—",
   }));
+
+  const activeTab = TABS.find((t) => t.key === tab);
+  const activeList = (categories[tab] || []).slice(0, 8);
 
   return (
     <div className="explore">
@@ -38,14 +45,30 @@ export default function Explore() {
 
       <TickerTape memes={tickerData} />
 
-      <section className="steps">
-        {STEPS.map((s) => (
-          <div className="step" key={s.n}>
-            <span className="step__n">{s.n}</span>
-            <h3>{s.title}</h3>
-            <p>{s.body}</p>
+      <section className="discover-section">
+        <div className="discover-section__tabs">
+          {TABS.map((t) => (
+            <button
+              key={t.key}
+              className={tab === t.key ? "active" : ""}
+              onClick={() => setTab(t.key)}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
+
+        {loading && <p className="state-msg">Loading…</p>}
+        {!loading && !error && activeList.length === 0 && (
+          <p className="state-msg">{activeTab.empty}</p>
+        )}
+        {!loading && activeList.length > 0 && (
+          <div className="discover-section__list">
+            {activeList.map((m, i) => (
+              <TokenRow meme={m} key={m.token} rank={i + 1} />
+            ))}
           </div>
-        ))}
+        )}
       </section>
 
       <section id="grid" className="grid-section">

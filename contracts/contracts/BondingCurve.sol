@@ -28,6 +28,12 @@ contract BondingCurve is ReentrancyGuard {
     uint16 public constant FEE_BPS = 100; // 1% trading fee
     uint16 private constant BPS_DENOM = 10_000;
 
+    /// @notice Real USDC reserve at which a curve is considered "graduated" —
+    /// i.e. mature enough that, in a future version, it could migrate to a
+    /// full DEX pool. Purely a status flag in v1; trading always stays on
+    /// the curve regardless of this threshold. 69,000 USDC, pump.fun-style.
+    uint256 public constant GRADUATION_THRESHOLD_USDC = 69_000_000_000; // 6 decimals
+
     event Buy(address indexed buyer, uint256 usdcIn, uint256 feeAmount, uint256 tokensOut);
     event Sell(address indexed seller, uint256 tokensIn, uint256 usdcOut, uint256 feeAmount);
 
@@ -52,6 +58,11 @@ contract BondingCurve is ReentrancyGuard {
         uint256 totalUsdc = virtualUsdcReserve + realUsdcReserve;
         if (tokenReserve == 0) return 0;
         return (totalUsdc * 1e18) / tokenReserve;
+    }
+
+    /// @notice Whether this curve has crossed the graduation threshold.
+    function isGraduated() external view returns (bool) {
+        return realUsdcReserve >= GRADUATION_THRESHOLD_USDC;
     }
 
     /// @notice Buy meme tokens with USDC. Caller must approve USDC first.

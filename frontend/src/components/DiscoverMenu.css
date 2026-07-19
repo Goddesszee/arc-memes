@@ -1,0 +1,77 @@
+.discover-menu { position: relative; }
+
+.discover-menu__trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 0.95rem;
+  padding: 0;
+}
+
+.discover-menu__trigger:hover { color: var(--text); }
+
+.discover-menu__panel {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 0;
+  width: 320px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 20px 48px -16px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  animation: dropdown-in 0.12s ease;
+  z-index: 20;
+}
+
+@keyframes dropdown-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.discover-menu__tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+}
+
+.discover-menu__tabs button {
+  flex: 1;
+  white-space: nowrap;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 11px 8px;
+  border-bottom: 2px solid transparent;
+}
+
+.discover-menu__tabs button.active {
+  color: var(--violet-hi);
+  border-bottom-color: var(--violet-hi);
+}
+
+.discover-menu__list {
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.discover-menu__empty {
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 24px 12px;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .discover-menu__panel { position: fixed; left: 16px; right: 16px; width: auto; top: 68px; }
+}

@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { useWallet } from "../lib/WalletContext";
 import { explorerAddressUrl } from "../lib/config";
 import ThemeToggle from "./ThemeToggle";
+import DiscoverMenu from "./DiscoverMenu";
 import "./NavBar.css";
 
 function shortAddr(addr) {
@@ -41,6 +42,7 @@ export default function NavBar() {
 
       <nav className="navbar__links">
         <NavLink to="/" end className={({ isActive }) => isActive ? "active" : ""}>Explore</NavLink>
+        <DiscoverMenu />
         <NavLink to="/launch" className={({ isActive }) => isActive ? "active" : ""}>Launch a meme</NavLink>
       </nav>
 
