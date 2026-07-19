@@ -1,11 +1,12 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import { useParams, Link } from "react-router-dom";
-import { Contract, JsonRpcProvider, formatUnits } from "ethers";
+import { Contract, formatUnits } from "ethers";
+import { getReadProvider } from "../lib/provider";
 import { useWallet } from "../lib/WalletContext";
 import { useMemes } from "../lib/MemesContext";
 import { useToast } from "../lib/ToastContext";
 import {
-  ARC_RPC_URL, PROFILE_REGISTRY_ADDRESS, USDC_ADDRESS, EURC_ADDRESS, CIRBTC_ADDRESS,
+  PROFILE_REGISTRY_ADDRESS, USDC_ADDRESS, EURC_ADDRESS, CIRBTC_ADDRESS,
   explorerAddressUrl,
 } from "../lib/config";
 import { PROFILE_REGISTRY_ABI, ERC20_ABI } from "../lib/abis";
@@ -50,7 +51,7 @@ export default function Profile() {
 
   const load = useCallback(async () => {
     setLoading(true);
-    const provider = new JsonRpcProvider(ARC_RPC_URL);
+    const provider = getReadProvider();
 
     try {
       if (PROFILE_REGISTRY_ADDRESS) {

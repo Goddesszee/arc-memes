@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState, useCallback, useMemo } from "react";
-import { Contract, JsonRpcProvider, formatUnits } from "ethers";
-import { FACTORY_ADDRESS, ARC_RPC_URL, TOTAL_SUPPLY, GRADUATION_THRESHOLD_USDC } from "./config";
+import { Contract, formatUnits } from "ethers";
+import { getReadProvider } from "./provider";
+import { FACTORY_ADDRESS, TOTAL_SUPPLY, GRADUATION_THRESHOLD_USDC } from "./config";
 import { FACTORY_ABI, CURVE_ABI } from "./abis";
 
 const MemesContext = createContext(null);
@@ -18,7 +19,7 @@ export function MemesProvider({ children }) {
       return;
     }
     try {
-      const provider = new JsonRpcProvider(ARC_RPC_URL);
+      const provider = getReadProvider();
       const factory = new Contract(FACTORY_ADDRESS, FACTORY_ABI, provider);
       const count = Number(await factory.memeCount());
       const raw = await factory.getMemes(0, count);

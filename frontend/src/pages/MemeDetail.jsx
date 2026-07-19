@@ -1,9 +1,10 @@
 import { useEffect, useState, useCallback } from "react";
 import { useParams, Link } from "react-router-dom";
-import { Contract, JsonRpcProvider, formatUnits, parseUnits } from "ethers";
+import { Contract, formatUnits, parseUnits } from "ethers";
+import { getReadProvider } from "../lib/provider";
 import { useWallet } from "../lib/WalletContext";
 import { useToast } from "../lib/ToastContext";
-import { FACTORY_ADDRESS, USDC_ADDRESS, ARC_RPC_URL, explorerTxUrl, explorerTokenUrl } from "../lib/config";
+import { FACTORY_ADDRESS, USDC_ADDRESS, explorerTxUrl, explorerTokenUrl } from "../lib/config";
 import { FACTORY_ABI, CURVE_ABI, ERC20_ABI } from "../lib/abis";
 import "./MemeDetail.css";
 
@@ -22,7 +23,7 @@ export default function MemeDetail() {
 
   const load = useCallback(async () => {
     if (!FACTORY_ADDRESS) return;
-    const provider = new JsonRpcProvider(ARC_RPC_URL);
+    const provider = getReadProvider();
     const factory = new Contract(FACTORY_ADDRESS, FACTORY_ABI, provider);
     const count = Number(await factory.memeCount());
     const all = await factory.getMemes(0, count);
