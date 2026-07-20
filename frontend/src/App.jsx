@@ -3,6 +3,7 @@ import { WalletProvider } from "./lib/WalletContext";
 import { ThemeProvider } from "./lib/ThemeContext";
 import { ToastProvider } from "./lib/ToastContext";
 import { MemesProvider } from "./lib/MemesContext";
+import { ReceiptProvider } from "./lib/ReceiptContext";
 import TopTicker from "./components/TopTicker";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
@@ -19,21 +20,23 @@ export default function App() {
       <ToastProvider>
         <WalletProvider>
           <MemesProvider>
-            <BrowserRouter>
-              <div className="app-header">
-                <TopTicker />
-                <NavBar />
-              </div>
-              <Routes>
-                <Route path="/" element={<Explore />} />
-                <Route path="/launch" element={<Launch />} />
-                <Route path="/meme/:tokenAddress" element={<MemeDetail />} />
-                <Route path="/profile/:address" element={<Profile />} />
-                <Route path="/swap" element={<Swap />} />
-                <Route path="/send" element={<Send />} />
-              </Routes>
-              <Footer />
-            </BrowserRouter>
+            <ReceiptProvider>
+              <BrowserRouter>
+                <div className="app-header">
+                  <TopTicker />
+                  <NavBar />
+                </div>
+                <Routes>
+                  <Route path="/" element={<Explore />} />
+                  <Route path="/launch" element={<Launch />} />
+                  <Route path="/meme/:tokenAddress" element={<MemeDetail />} />
+                  <Route path="/profile/:address" element={<Profile />} />
+                  <Route path="/swap" element={<Swap />} />
+                  <Route path="/send" element={<Send />} />
+                </Routes>
+                <Footer />
+              </BrowserRouter>
+            </ReceiptProvider>
           </MemesProvider>
         </WalletProvider>
       </ToastProvider>

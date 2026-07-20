@@ -1,8 +1,9 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Contract } from "ethers";
+import { Contract, formatUnits } from "ethers";
 import { useWallet } from "../lib/WalletContext";
 import { useToast } from "../lib/ToastContext";
+import { useReceipt } from "../lib/ReceiptContext";
 import { FACTORY_ADDRESS, USDC_ADDRESS, explorerTxUrl } from "../lib/config";
 import { FACTORY_ABI, ERC20_ABI } from "../lib/abis";
 import { fileToLogoDataUri } from "../lib/imageUtils";
@@ -22,6 +23,7 @@ const MAX_LOGO_CHARS = 60_000;
 export default function Launch() {
   const { address, signer, connect } = useWallet();
   const { push } = useToast();
+  const { openReceipt } = useReceipt();
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
 
@@ -108,6 +110,19 @@ export default function Launch() {
       });
 
       if (launchedEvent) {
+        openReceipt({
+          type: "launch",
+          meme: {
+            token: launchedEvent.args.token,
+            name: name.trim(),
+            symbol: symbol.trim().toUpperCase(),
+            imageURI: logoDataUri,
+          },
+          creator: address,
+          launchFeeLabel: fee > 0n ? `${formatUnits(fee, 6)} USDC` : "Free",
+          txHash: receipt.hash,
+          timestamp: Date.now(),
+        });
         navigate(`/meme/${launchedEvent.args.token}`);
       } else {
         navigate("/");

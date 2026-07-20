@@ -4,17 +4,20 @@ import { Contract, formatUnits, parseUnits } from "ethers";
 import { getReadProvider } from "../lib/provider";
 import { useWallet } from "../lib/WalletContext";
 import { useToast } from "../lib/ToastContext";
+import { useReceipt } from "../lib/ReceiptContext";
 import { FACTORY_ADDRESS, USDC_ADDRESS, explorerTxUrl, explorerTokenUrl } from "../lib/config";
 import { FACTORY_ABI, CURVE_ABI, ERC20_ABI } from "../lib/abis";
 import PriceChart from "../components/PriceChart";
 import ActivityFeed from "../components/ActivityFeed";
 import ShareButton from "../components/ShareButton";
+import CopyChip from "../components/CopyChip";
 import "./MemeDetail.css";
 
 export default function MemeDetail() {
   const { tokenAddress } = useParams();
   const { address, signer, connect } = useWallet();
   const { push } = useToast();
+  const { openReceipt } = useReceipt();
 
   const [meme, setMeme] = useState(null);
   const [price, setPrice] = useState(null);
@@ -80,6 +83,8 @@ export default function MemeDetail() {
       setBusy(true);
       const curve = new Contract(meme.curve, CURVE_ABI, signer);
       let receipt;
+      let amountTokens = 0;
+      let amountUsdc = 0;
 
       if (mode === "buy") {
         const usdc = new Contract(USDC_ADDRESS, ERC20_ABI, signer);
@@ -93,6 +98,9 @@ export default function MemeDetail() {
         setTxStatus("Buying…");
         const tx = await curve.buy(usdcIn, 0);
         receipt = await tx.wait();
+        amountUsdc = Number(amount);
+        const buyEvent = receipt.logs.map((l) => { try { return curve.interface.parseLog(l); } catch { return null; } }).find((p) => p?.name === "Buy");
+        amountTokens = buyEvent ? Number(formatUnits(buyEvent.args.tokensOut, 18)) : 0;
       } else {
         const token = new Contract(meme.token, ERC20_ABI, signer);
         const tokensIn = parseUnits(amount, 18);
@@ -105,6 +113,9 @@ export default function MemeDetail() {
         setTxStatus("Selling…");
         const tx = await curve.sell(tokensIn, 0);
         receipt = await tx.wait();
+        amountTokens = Number(amount);
+        const sellEvent = receipt.logs.map((l) => { try { return curve.interface.parseLog(l); } catch { return null; } }).find((p) => p?.name === "Sell");
+        amountUsdc = sellEvent ? Number(formatUnits(sellEvent.args.usdcOut, 6)) : 0;
       }
 
       setTxStatus("Done");
@@ -118,6 +129,18 @@ export default function MemeDetail() {
       await load();
       await loadBalances(meme);
       setActivityVersion((v) => v + 1);
+
+      openReceipt({
+        type: "trade",
+        action: mode,
+        meme,
+        amountTokens,
+        amountUsdc,
+        priceUsdc: price || 0,
+        trader: address,
+        txHash: receipt.hash,
+        timestamp: Date.now(),
+      });
     } catch (err) {
       const message = err.shortMessage || err.message || "Transaction failed";
       setError(message);
@@ -161,6 +184,11 @@ export default function MemeDetail() {
               {meme.creator.slice(0, 6)}…{meme.creator.slice(-4)}
             </Link>
           </p>
+          <div className="meme-detail__copy-row">
+            <CopyChip label="Contract" value={meme.token} display={`${meme.token.slice(0, 6)}...${meme.token.slice(-4)}`} />
+            <CopyChip label="Buy link" value={`${window.location.origin}/meme/${meme.token}`} display="Copy link" />
+          </div>
+
           <div className="meme-detail__actions">
             <a className="meme-detail__explorer-link" href={explorerTokenUrl(meme.token)} target="_blank" rel="noopener noreferrer">
               View token on Explorer ↗

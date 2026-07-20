@@ -1,0 +1,28 @@
+.copy-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--surface-hi);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 0.82rem;
+  padding: 7px 12px;
+  border-radius: 8px;
+  transition: border-color 0.12s ease;
+}
+
+.copy-chip:hover { border-color: var(--violet-hi); }
+
+.copy-chip__label {
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.copy-chip__value {
+  font-family: var(--font-mono);
+}
+
+.copy-chip__icon {
+  color: var(--muted);
+  flex-shrink: 0;
+}
