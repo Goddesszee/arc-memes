@@ -53,10 +53,11 @@ export default function NavBar() {
         </button>
 
         <Link to="/" className="navbar__brand">
-          <svg className="navbar__mark" width="20" height="20" viewBox="0 0 32 32" aria-hidden="true">
-            <circle cx="11" cy="13" r="2.4" fill="#0B0F19" />
-            <circle cx="21" cy="13" r="2.4" fill="#0B0F19" />
-            <path d="M9 19 Q16 25 23 19" stroke="#3D7BFF" strokeWidth="2.6" fill="none" strokeLinecap="round" />
+          <svg className="navbar__mark" width="34" height="34" viewBox="0 0 32 32" aria-hidden="true">
+            <rect x="0" y="0" width="32" height="32" rx="9" fill="#0A0E1A" />
+            <circle cx="11" cy="13" r="3.1" fill="#FFFFFF" />
+            <circle cx="21" cy="13" r="3.1" fill="#FFFFFF" />
+            <path d="M8 18.5 Q16 26 24 18.5" stroke="#3D7BFF" strokeWidth="3.4" fill="none" strokeLinecap="round" />
           </svg>
           Memes on Arc
         </Link>
