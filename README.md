@@ -1,4 +1,4 @@
-# Arc Memes
+# Memes on Arc
 
 A meme token launchpad on Arc. Anyone can launch a meme as its own ERC20 token
 for a small USDC fee — no liquidity to seed, no listing process. Each token

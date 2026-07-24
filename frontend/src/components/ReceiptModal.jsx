@@ -41,7 +41,7 @@ export default function ReceiptModal({ state, onClose }) {
       if (!blob) throw new Error("Image could not be exported");
       const file = new File([blob], filename, { type: "image/png" });
       if (navigator.share && navigator.canShare?.({ files: [file] })) {
-        await navigator.share({ files: [file], title: "Arc Memes" });
+        await navigator.share({ files: [file], title: "Memes on Arc" });
       } else {
         push({ title: "Sharing isn't supported here", message: "Use Download instead, or long press the image below.", variant: "error" });
       }

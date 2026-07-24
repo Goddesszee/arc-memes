@@ -1,4 +1,4 @@
-# Arc Memes — Frontend
+# Memes on Arc: Frontend
 
 React + Vite app for exploring, launching, and trading meme tokens on Arc.
 

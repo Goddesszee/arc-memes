@@ -57,7 +57,7 @@ export default function NavBar() {
             <path d="M6 24 Q16 6 26 24" stroke="#3D7BFF" strokeWidth="2.5" fill="none" strokeLinecap="round" />
             <circle cx="26" cy="24" r="2.4" fill="#0B0F19" />
           </svg>
-          Arc Memes
+          Memes on Arc
         </Link>
 
         <nav className="navbar__links">

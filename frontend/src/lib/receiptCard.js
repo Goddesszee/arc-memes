@@ -68,7 +68,7 @@ export async function buildReceiptCanvas(config) {
 
   ctx.fillStyle = "#F5F7FF";
   ctx.font = "700 26px 'Space Grotesk', sans-serif";
-  ctx.fillText("Arc Memes", 48, y);
+  ctx.fillText("Memes on Arc", 48, y);
   ctx.fillStyle = "#8890A6";
   ctx.font = "500 16px 'JetBrains Mono', monospace";
   const kicker = config.type === "launch" ? "LAUNCH RECEIPT"

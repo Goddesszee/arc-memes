@@ -1,4 +1,4 @@
-# Arc Memes — Contracts
+# Memes on Arc: Contracts
 
 Hardhat project targeting Arc testnet (chain ID `5042002`).
 
