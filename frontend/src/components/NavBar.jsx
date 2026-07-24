@@ -54,8 +54,9 @@ export default function NavBar() {
 
         <Link to="/" className="navbar__brand">
           <svg className="navbar__mark" width="20" height="20" viewBox="0 0 32 32" aria-hidden="true">
-            <path d="M6 24 Q16 6 26 24" stroke="#3D7BFF" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-            <circle cx="26" cy="24" r="2.4" fill="#0B0F19" />
+            <circle cx="11" cy="13" r="2.4" fill="#0B0F19" />
+            <circle cx="21" cy="13" r="2.4" fill="#0B0F19" />
+            <path d="M9 19 Q16 25 23 19" stroke="#3D7BFF" strokeWidth="2.6" fill="none" strokeLinecap="round" />
           </svg>
           Memes on Arc
         </Link>

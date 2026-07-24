@@ -66,9 +66,25 @@ export async function buildReceiptCanvas(config) {
 
   let y = 70;
 
+  // Small brand mark: two eyes + a curved smile, same as the app logo
+  ctx.fillStyle = "#F5F7FF";
+  ctx.beginPath();
+  ctx.arc(51, y - 9, 3, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(65, y - 9, 3, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = "#3D7BFF";
+  ctx.lineWidth = 3;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(46, y);
+  ctx.quadraticCurveTo(58, y + 10, 70, y);
+  ctx.stroke();
+
   ctx.fillStyle = "#F5F7FF";
   ctx.font = "700 26px 'Space Grotesk', sans-serif";
-  ctx.fillText("Memes on Arc", 48, y);
+  ctx.fillText("Memes on Arc", 82, y);
   ctx.fillStyle = "#8890A6";
   ctx.font = "500 16px 'JetBrains Mono', monospace";
   const kicker = config.type === "launch" ? "LAUNCH RECEIPT"
